@@ -23,6 +23,7 @@ class URL(Enum):
     metadata = "api/v1/metadata/"
     task = "api/v1/task/?task_id="
     publish_targets = "api/v1/targets/publish/"
+    artifacts = "api/v1/artifacts/"
 
 
 class Methods(Enum):
