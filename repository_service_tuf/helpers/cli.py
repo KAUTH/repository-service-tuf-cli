@@ -54,11 +54,11 @@ def calculate_blake2b_256(filepath: str) -> str:
     """
     Calculate the blake2b-256 hash of the given file.
 
-    :param filepath: THe path to the file for which we want to calculate the
+    :param filepath: The path to the file for which we want to calculate the
     hash.
     """
 
-    # Using default digest size of 32
+    # Using non-default digest size of 32 for blake2b-256
     hasher = hashlib.blake2b(digest_size=32)
 
     # 8kB chunk size
@@ -119,7 +119,6 @@ def validate_cli_add_artifact_options(
     """
 
     if settings.get("AUTH") is False:
-
         if token is None:
             raise click.ClickException(
                 "Use the built-in authentication (--auth) or provide an RSTUF"
