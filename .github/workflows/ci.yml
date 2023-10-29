@@ -37,6 +37,14 @@ jobs:
           .mypy_cache
         key: ${{ runner.os }}-py${{ matrix.python-versions }}-mypy-${{ hashFiles('**/.mypy_cache') }}
 
+    - name: Restore black cache
+      id: cache-black-restore
+      uses: actions/cache/restore@v3
+      with:
+        path: |
+          $HOME/.cache/black/
+        key: ${{ runner.os }}-py${{ matrix.python-versions }}-black-${{ hashFiles('$HOME/.cache/black/') }}
+
     - name: Run Python tests
       run: |
         make tests
@@ -48,6 +56,14 @@ jobs:
         path: |
           .mypy_cache
         key: ${{ runner.os }}-py${{ matrix.python-versions }}-mypy-${{ hashFiles('**/.mypy_cache') }}
+
+    - name: Save black cache
+      id: cache-black-save
+      uses: actions/cache/save@v3
+      with:
+        path: |
+          $HOME/.cache/black/
+        key: ${{ runner.os }}-py${{ matrix.python-versions }}-black-${{ hashFiles('$HOME/.cache/black/') }}
 
     - name: Codecov
       uses: codecov/codecov-action@eaaf4bedf32dbdc6b720b63067d99c4d77d6047d
